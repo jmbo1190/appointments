@@ -15,26 +15,23 @@ describe("Appointment", () => {
         document.body.replaceChildren(container);
     })
 
+    const render = (component) => {
+        // using act to wait for asynchronous render() to complete before testing
+        act( () => ReactDOM.createRoot(container).render(component) )
+    }
+
     it("renders the customer's first name", () => {
         const customer = { firstName: "Ashley" };
-        const component = <Appointment customer={ customer } />;
         
-        // using act to wait for asynchronous render() to complete before testing
-        act( () => {
-            ReactDOM.createRoot(container).render(component);
-        });
+        render( <Appointment customer={ customer } /> );
 
         expect(document.body.textContent).toContain("Ashley");
     })
 
     it("renders another customer's first name", () => {
         const customer = { firstName: "Jordan" };
-        const component = <Appointment customer={ customer } />;
         
-        // using act to wait for asynchronous render() to complete before testing
-        act( () => {
-            ReactDOM.createRoot(container).render(component);
-        });
+        render( <Appointment customer={ customer } /> );
 
         expect(document.body.textContent).toContain("Jordan");
     })
