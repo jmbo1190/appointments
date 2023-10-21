@@ -52,6 +52,23 @@ describe("Appointment", () => {
         expect(document.body.textContent).toContain("Graham");
     })
 
+    it("renders the Salon's service", () => {
+        const customer = { firstName: "Ashley", lastName: "Hamilton", phoneNumber: "(997) 721-4394" };
+        const stylist = "Graham";
+        const service = "haircut";
+        render( <Appointment customer={ customer } stylist={ stylist } service={ service }/> );
+        expect(document.body.textContent).toContain("haircut");
+    })
+
+    it("renders the appointment notes", () => {
+        const customer = { firstName: "Ashley", lastName: "Hamilton", phoneNumber: "(997) 721-4394" };
+        const stylist = "Graham";
+        const service = "haircut";
+        const notes = "The customer is allergic to many products.";
+        render( <Appointment customer={ customer } stylist={ stylist } service={ service } notes={ notes }/> );
+        expect(document.body.textContent).toContain("The customer is allergic to many products.");
+    })
+
 });
 
 
