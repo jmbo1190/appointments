@@ -6,13 +6,19 @@ import { Appointment } from "../src/Appointment";
 
 describe("Appointment", () => {
 
+
+    let container;
+
+    beforeEach(() => {
+        container = document.createElement("div");
+        // document.body.appendChild(container);
+        document.body.replaceChildren(container);
+    })
+
     it("renders the customer's first name", () => {
         const customer = { firstName: "Ashley" };
         const component = <Appointment customer={ customer } />;
-        const container = document.createElement("div");
-        // document.body.appendChild(container);
-        document.body.replaceChildren(container);
-
+        
         // using act to wait for asynchronous render() to complete before testing
         act( () => {
             ReactDOM.createRoot(container).render(component);
@@ -24,10 +30,7 @@ describe("Appointment", () => {
     it("renders another customer's first name", () => {
         const customer = { firstName: "Jordan" };
         const component = <Appointment customer={ customer } />;
-        const container = document.createElement("div");
-        // document.body.appendChild(container);
-        document.body.replaceChildren(container);
-
+        
         // using act to wait for asynchronous render() to complete before testing
         act( () => {
             ReactDOM.createRoot(container).render(component);
