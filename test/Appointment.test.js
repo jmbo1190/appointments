@@ -40,6 +40,13 @@ describe("AppointmentsDayView", () => {
 
     let container;
 
+    const today = new Date();
+    const twoAppointments = [
+            { startsAt: today.setHours(12, 0)},
+            { startsAt: today.setHours(13, 0)}
+        ];
+        
+
     beforeEach(() => {
         container = document.createElement("div");
         // document.body.appendChild(container);
@@ -63,22 +70,12 @@ describe("AppointmentsDayView", () => {
     });
 
     it("renders an <li> element for each apointment", () => {
-        const today = new Date();
-        const twoAppointments = [
-            { startsAt: today.setHours(12, 0)},
-            { startsAt: today.setHours(13, 0)}
-        ];
         render(<AppointmentsDayView appointments={ twoAppointments }/>);
         const listChildren = document.querySelectorAll("ol > li");
         expect(listChildren).toHaveLength(2);
     });
 
     it("renders the time of each appointment", () => {
-        const today = new Date();
-        const twoAppointments = [
-            { startsAt: today.setHours(12, 0)},
-            { startsAt: today.setHours(13, 0)}
-        ];
         render(<AppointmentsDayView appointments={ twoAppointments }/>);
         const listChildren = document.querySelectorAll("li");
         expect(listChildren[0].textContent).toEqual("12:00")
