@@ -51,10 +51,16 @@ describe("AppointmentsDayView", () => {
         act( () => ReactDOM.createRoot(container).render(component) )
     };
 
-    it("renders a div with the right ID", () => {
+    it("renders a <div> with the right ID", () => {
         render(<AppointmentsDayView appointments={ [] }/>);
         expect(document.querySelector("div#appointmentsDayView")).not.toBeNull();
     });
+
+    it("renders an <ol> element to display apointments", () => {
+        render(<AppointmentsDayView appointments={ [] }/>);
+        const listElement = document.querySelector("ol");
+        expect(listElement).not.toBeNull();
+    })
 
 });
 
