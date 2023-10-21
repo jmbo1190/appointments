@@ -110,5 +110,12 @@ describe("AppointmentsDayView", () => {
         expect(buttons[0].type).toEqual("button");
     });
 
+    it("renders another appointment when selected", () => {
+        render(<AppointmentsDayView appointments={ twoAppointments }/>);
+        const button2 = document.querySelectorAll("button")[1];
+        act( () => button2.click() );
+        expect(document.body.textContent).toContain("Jordan");
+    });
+
 });
 
