@@ -98,5 +98,10 @@ describe("AppointmentsDayView", () => {
         expect(document.body.textContent).toContain("Ashley");
     });
 
+    it("does not say there are no appointments today when there are appointments", () => {
+        render(<AppointmentsDayView appointments={ twoAppointments }/>);
+        expect(document.body.textContent).not.toContain("There are no appointments scheduled for today.");
+    });
+
 });
 
