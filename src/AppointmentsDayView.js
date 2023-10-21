@@ -1,6 +1,22 @@
 import React, { useState } from 'react';
 
-export const Appointment = ( { customer } ) => ( <div> { customer.firstName } </div> ) ;
+export const Appointment = ( { customer, stylist } ) => ( 
+    <div> 
+        <table>
+            <tbody>
+            <tr>
+                <td>Customer</td><td>{ `${customer.firstName} ${customer.lastName}` }</td>
+            </tr>
+            <tr>
+                <td>Phone number</td><td>{ customer.phoneNumber }</td>
+            </tr>
+            <tr>
+                <td>Stylist</td><td>{ stylist }</td>
+            </tr>
+            </tbody>
+        </table>
+    </div> 
+    ) ;
 
 const appointmentTimeOfDay = ( startsAt ) => {
     const [h, m] = new Date(startsAt).toTimeString().split(":");
@@ -20,8 +36,12 @@ export const AppointmentsDayView = ( { appointments } ) => {
                     </li>
                 )) }
             </ol>
-            { appointments.length ? 
-                <Appointment {...appointments[selectedAppointment]}/>
+            { appointments.length ? (
+                    <>
+                    <h1>Today's appointment at {appointmentTimeOfDay(appointments[selectedAppointment].startsAt)}</h1>
+                    <Appointment {...appointments[selectedAppointment]}/>
+                    </>
+                )
                 :
                 <p>There are no appointments scheduled for today.</p>
             }
