@@ -6,6 +6,7 @@ export const CustomerForm = ( { original } ) => {
         <input 
             type="text" 
             name="firstName"
+            id="firstName"
             value={ original.firstName} 
             readOnly
         />
