@@ -122,6 +122,17 @@ describe("CustomerForm", () => {
 
     });
 
+    describe("the phoneNumber field", () => {
+
+        itRendersAsATextBox("phoneNumber");
+        itIncludesTheExistingValue("phoneNumber", "012345");
+        itRendersALabel("phoneNumber", "Phone number");
+        itAssignsAnIdThatMatchesTheLabelId("phoneNumber");
+        itSubmitsExistingValue("phoneNumber", "012345");
+        itSubmitsNewValue("phoneNumber", "054321");
+
+    });
+
     it("prevents the default action when submitting the form", () => {
         render(
           <CustomerForm
