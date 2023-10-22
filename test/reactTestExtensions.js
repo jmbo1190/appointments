@@ -16,6 +16,15 @@ export const render = (component) =>
 export const click = (element) =>
   act(() => element.click());
 
+export const submit = (formElement) => {
+    // We need to make sure the event bubbles; otherwise, it won’t make it to our event handler
+    // React has its own event handling system that is triggered by events reaching the React root element.
+    // The submit event must bubble up to our container element before React will process it.
+    const event = new Event("submit", { bubbles: true, cancelable: true } );
+    act(() => formElement.dispatchEvent(event));
+    return event;
+};
+
 export const element = (selector) =>
   document.querySelector(selector);
 
