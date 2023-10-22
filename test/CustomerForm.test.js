@@ -42,4 +42,10 @@ describe("CustomerForm", () => {
         expect(label).not.toBeNull();
     });
 
+    it("renders 'First name' as the first name label content", () => {
+        render(<CustomerForm original={blankCustomer} />);
+        const label = element("label[for=firstName]");
+        expect(label).toContainText("First name");
+    });
+
 });

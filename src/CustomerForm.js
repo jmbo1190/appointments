@@ -9,7 +9,7 @@ export const CustomerForm = ( { original } ) => {
             value={ original.firstName} 
             readOnly
         />
-        <label htmlFor="firstName" />
+        <label htmlFor="firstName" >First name</label>
     </form>
     )
 };
