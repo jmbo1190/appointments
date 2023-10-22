@@ -15,7 +15,7 @@ import { CustomerForm } from "../src/CustomerForm";
 
 describe("CustomerForm", () => {
 
-    const blankCustomer = { firstName: "" };
+    const blankCustomer = { firstName: "", lastName: "", phoneNumber: "" };
 
     beforeEach(() => {
         initializeReactContainer();
@@ -108,6 +108,17 @@ describe("CustomerForm", () => {
         itAssignsAnIdThatMatchesTheLabelId("firstName");
         itSubmitsExistingValue("firstName", "Ashley");
         itSubmitsNewValue("firstName", "Jamie");
+
+    });
+
+    describe("the lastName field", () => {
+
+        itRendersAsATextBox("lastName");
+        itIncludesTheExistingValue("lastName", "Jones");
+        itRendersALabel("lastName", "Last name");
+        itAssignsAnIdThatMatchesTheLabelId("lastName");
+        itSubmitsExistingValue("lastName", "Jones");
+        itSubmitsNewValue("lastName", "Smith");
 
     });
 
