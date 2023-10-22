@@ -6,6 +6,12 @@ import {
   AppointmentsDayView,
 } from "../src/AppointmentsDayView";
 
+// Test helper modules
+import {
+    initializeReactContainer,
+    container,
+  } from "./reactTestExtensions";
+  
 describe("Appointment", () => {
   const blankCustomer = {
     firstName: "",
@@ -13,11 +19,8 @@ describe("Appointment", () => {
     phoneNumber: "",
   };
 
-  let container;
-
   beforeEach(() => {
-    container = document.createElement("div");
-    document.body.replaceChildren(container);
+    initializeReactContainer();
   });
 
   const render = (component) =>
@@ -190,11 +193,8 @@ describe("AppointmentsDayView", () => {
     },
   ];
 
-  let container;
-
   beforeEach(() => {
-    container = document.createElement("div");
-    document.body.replaceChildren(container);
+    initializeReactContainer();
   });
 
   const render = (component) =>
