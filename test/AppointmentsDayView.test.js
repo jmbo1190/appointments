@@ -21,6 +21,14 @@ describe("Appointment", () => {
         act( () => ReactDOM.createRoot(container).render(component) )
     }
 
+    const appointmentTable = () => document.querySelector("div#appointmentView > table");
+
+    it("renders a <table>", () => {
+        const customer = { firstName: "Ashley" };
+        render( <Appointment customer={ customer } /> );
+        expect(appointmentTable()).not.toBeNull();
+    });
+
     it("renders the customer's first name", () => {
         const customer = { firstName: "Ashley" };
         render( <Appointment customer={ customer } /> );

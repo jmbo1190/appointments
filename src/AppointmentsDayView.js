@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 export const Appointment = ( { customer, stylist, service, notes } ) => ( 
-    // <div> 
+    <div id="appointmentView"> 
         <table>
             <tbody>
             <tr>
@@ -21,7 +21,7 @@ export const Appointment = ( { customer, stylist, service, notes } ) => (
             </tr>
             </tbody>
         </table>
-    // </div> 
+    </div> 
     ) ;
 
 const appointmentTimeOfDay = ( startsAt ) => {
