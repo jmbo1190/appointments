@@ -11,6 +11,7 @@ export const CustomerForm = ( { original } ) => {
             readOnly
         />
         <label htmlFor="firstName" >First name</label>
+        <input type="submit" value="Add" />
     </form>
     )
 };
