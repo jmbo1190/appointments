@@ -1,11 +1,6 @@
 import ReactDOM from "react-dom/client";
 import { act } from "react-dom/test-utils";
 
-
-/**
- * Helper methods for React component tests
- */ 
-
 export let container;
 
 export const initializeReactContainer = () => {
@@ -14,22 +9,21 @@ export const initializeReactContainer = () => {
 };
 
 export const render = (component) =>
-    act(() =>
-        ReactDOM.createRoot(container).render(component)
-    );
+  act(() =>
+    ReactDOM.createRoot(container).render(component)
+  );
 
 export const click = (element) =>
-    act(() => element.click());
-
+  act(() => element.click());
 
 export const element = (selector) =>
-    document.querySelector(selector);
+  document.querySelector(selector);
 
 export const elements = (selector) =>
-    Array.from(document.querySelectorAll(selector));
+  Array.from(document.querySelectorAll(selector));
 
 export const typesOf = (elements) =>
-    elements.map((element) => element.type);
+  elements.map((element) => element.type);
 
 export const textOf = (elements) =>
-    elements.map((element) => element.textContent);
+  elements.map((element) => element.textContent);

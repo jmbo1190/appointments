@@ -1,23 +1,20 @@
 import React from "react";
-// import ReactDOM from "react-dom/client";
-// import { act } from "react-dom/test-utils";
+import ReactDOM from "react-dom/client";
 import {
   Appointment,
   AppointmentsDayView,
 } from "../src/AppointmentsDayView";
 
-// Test helper modules
 import {
-    // container,
-    initializeReactContainer,
-    render,
-    click,
-    element,
-    elements,
-    textOf,
-    typesOf,
-  } from "./reactTestExtensions";
-  
+  initializeReactContainer,
+  render,
+  click,
+  element,
+  elements,
+  textOf,
+  typesOf,
+} from "./reactTestExtensions";
+
 describe("Appointment", () => {
   const blankCustomer = {
     firstName: "",
@@ -30,9 +27,7 @@ describe("Appointment", () => {
   });
 
   const appointmentTable = () =>
-    element(
-      "#appointmentView > table"
-    );
+    element("#appointmentView > table");
 
   it("renders a table", () => {
     render(<Appointment customer={blankCustomer} />);
@@ -58,17 +53,13 @@ describe("Appointment", () => {
   it("renders the customer last name", () => {
     const customer = { lastName: "Jones" };
     render(<Appointment customer={customer} />);
-    expect(appointmentTable()).toContainText(
-      "Jones"
-    );
+    expect(appointmentTable()).toContainText("Jones");
   });
 
   it("renders another customer last name", () => {
     const customer = { lastName: "Smith" };
     render(<Appointment customer={customer} />);
-    expect(appointmentTable()).toContainText(
-      "Smith"
-    );
+    expect(appointmentTable()).toContainText("Smith");
   });
 
   it("renders the customer phone number", () => {
@@ -94,9 +85,10 @@ describe("Appointment", () => {
         stylist="Sam"
       />
     );
-    expect(appointmentTable()).toContainText(
+    expect(appointmentTable().textContent).toContain(
       "Sam"
     );
+    expect(appointmentTable()).toContainText("Sam");
   });
 
   it("renders another stylist name", () => {
@@ -106,9 +98,10 @@ describe("Appointment", () => {
         stylist="Jo"
       />
     );
-    expect(appointmentTable()).toContainText(
+    expect(appointmentTable().textContent).toContain(
       "Jo"
     );
+    expect(appointmentTable()).toContainText("Jo");
   });
 
   it("renders the salon service", () => {
@@ -118,9 +111,10 @@ describe("Appointment", () => {
         service="Cut"
       />
     );
-    expect(appointmentTable()).toContainText(
+    expect(appointmentTable().textContent).toContain(
       "Cut"
     );
+    expect(appointmentTable()).toContainText("Cut");
   });
 
   it("renders another salon service", () => {
@@ -142,9 +136,10 @@ describe("Appointment", () => {
         notes="abc"
       />
     );
-    expect(appointmentTable()).toContainText(
+    expect(appointmentTable().textContent).toContain(
       "abc"
     );
+    expect(appointmentTable()).toContainText("abc");
   });
 
   it("renders other appointment notes", () => {
@@ -154,16 +149,15 @@ describe("Appointment", () => {
         notes="def"
       />
     );
-    expect(appointmentTable()).toContainText(
+    expect(appointmentTable().textContent).toContain(
       "def"
     );
+    expect(appointmentTable()).toContainText("def");
   });
 
   it("renders an h3 element", () => {
     render(<Appointment customer={blankCustomer} />);
-    expect(
-      element("h3")
-    ).not.toBeNull();
+    expect(element("h3")).not.toBeNull();
   });
 
   it("renders the time as the heading", () => {
@@ -175,9 +169,9 @@ describe("Appointment", () => {
         startsAt={timestamp}
       />
     );
-    expect(
-      element("h3").textContent
-    ).toEqual("Today’s appointment at 09:00");
+    expect(element("h3")).toContainText(
+      "Today’s appointment at 09:00"
+    );
   });
 });
 
@@ -194,25 +188,21 @@ describe("AppointmentsDayView", () => {
     },
   ];
 
-  const secondButton = () => elements("button")[1];
-
   beforeEach(() => {
     initializeReactContainer();
   });
 
+  const secondButton = () => elements("button")[1];
 
   it("renders a div with the right id", () => {
     render(<AppointmentsDayView appointments={[]} />);
     expect(
-      element(
-        "div#appointmentsDayView"
-      )
+      element("div#appointmentsDayView")
     ).not.toBeNull();
   });
 
   it("renders an ol element to display appointments", () => {
     render(<AppointmentsDayView appointments={[]} />);
-    // const listElement = element("ol");
     expect(element("ol")).not.toBeNull();
   });
 
@@ -223,7 +213,6 @@ describe("AppointmentsDayView", () => {
       />
     );
 
-    // const listChildren = elements("ol > li");
     expect(elements("ol > li")).toHaveLength(2);
   });
 
@@ -234,15 +223,10 @@ describe("AppointmentsDayView", () => {
       />
     );
 
-    // const listChildren =
-    //   elements("li");
-    // expect(listChildren[0]).toContainText(
-    //   "12:00"
-    // );
-    // expect(listChildren[1]).toContainText(
-    //   "13:00"
-    // );
-    expect(textOf(elements("li"))).toEqual(["12:00", "13:00"]);
+    expect(textOf(elements("li"))).toEqual([
+      "12:00",
+      "13:00",
+    ]);
   });
 
   it("initially shows a message saying there are no appointments today", () => {
@@ -258,9 +242,10 @@ describe("AppointmentsDayView", () => {
         appointments={twoAppointments}
       />
     );
-    expect(document.body).toContainText(
+    expect(document.body.textContent).toContain(
       "Ashley"
     );
+    expect(document.body).toContainText("Ashley");
   });
 
   it("has a button element in each li", () => {
@@ -270,13 +255,10 @@ describe("AppointmentsDayView", () => {
       />
     );
 
-    const buttons =
-      elements("li > button");
-
-    // expect(buttons).toHaveLength(2);
-    // expect(buttons[0].type).toEqual("button");
-    expect(typesOf(elements("li > *"))).toEqual([ "button", "button", ]);
-      
+    expect(typesOf(elements("li > *"))).toEqual([
+      "button",
+      "button",
+    ]);
   });
 
   it("renders another appointment when selected", () => {
@@ -285,11 +267,8 @@ describe("AppointmentsDayView", () => {
         appointments={twoAppointments}
       />
     );
-    // const button = elements("button")[1];
     click(secondButton());
-    expect(document.body).toContainText(
-      "Jordan"
-    );
+    expect(document.body).toContainText("Jordan");
   });
 
   it("adds toggled class to button when selected", () => {
@@ -298,9 +277,8 @@ describe("AppointmentsDayView", () => {
         appointments={twoAppointments}
       />
     );
-    // const button = elements("button")[1];
     click(secondButton());
-    expect(secondButton().className).toContain("toggled");
+    expect(secondButton()).toHaveClass("toggled");
   });
 
   it("does not add toggled class if button is not selected", () => {
@@ -309,7 +287,9 @@ describe("AppointmentsDayView", () => {
         appointments={twoAppointments}
       />
     );
-    // const button = elements("button")[1];
-    expect(secondButton().className).not.toContain("toggled");
+    expect(secondButton().className).not.toMatch(
+      "toggled"
+    );
+    expect(secondButton()).not.toHaveClass("toggled");
   });
 });
