@@ -4,6 +4,8 @@ import {
     form,
     field,
     render,
+    click,
+    submit,
     initializeReactContainer,
 } from "./reactTestExtensions";
 import { CustomerForm } from "../src/CustomerForm";
@@ -58,5 +60,34 @@ describe("CustomerForm", () => {
         const button = element("input[type=submit]");
         expect(button).not.toBeNull();
     });
+
+    it("saves existing first name when submitted", () => {
+        expect.hasAssertions();
+
+        const customer = { firstName: "Ashley" };
+        // The Arrange phase is the render call 
+        render(
+            <CustomerForm
+                original={customer}
+                // the Assert phase is the onSubmit handler
+                onSubmit={ ({ firstName }) => expect(firstName).toEqual("Ashley") }
+            />
+        );
+        // The Act phase:
+        const button = element("input[type=submit]");
+        click(button);
+        //  If we did not use hasAssertions, this test would pass just by never calling onSubmit.
+      });
+
+      it("prevents the default action when submitting the form", () => {
+        render(
+          <CustomerForm
+            original={blankCustomer}
+            onSubmit={() => {}}
+          />
+        );
+        const event = submit(form());
+        expect(event.defaultPrevented).toBe(true);
+      });
 
 });
