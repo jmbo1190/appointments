@@ -8,14 +8,17 @@ export const CustomerForm = ( { original, onSubmit } ) => {
         onSubmit(customer);
     };
 
-    const handleChangeFirstName = ({ target }) =>
-        setCustomer( (customer) => ({ ...customer, firstName: target.value }) );
+    // const handleChangeFirstName = ({ target }) =>
+    //     setCustomer( (customer) => ({ ...customer, firstName: target.value }) );
 
-    const handleChangeLastName = ({ target }) =>
-        setCustomer( (customer) => ({ ...customer, lastName: target.value }) );
+    // const handleChangeLastName = ({ target }) =>
+    //     setCustomer( (customer) => ({ ...customer, lastName: target.value }) );
 
-    const handleChangePhoneNumber = ({ target }) =>
-        setCustomer( (customer) => ({ ...customer, phoneNumber: target.value }) );
+    // const handleChangePhoneNumber = ({ target }) =>
+    //     setCustomer( (customer) => ({ ...customer, phoneNumber: target.value }) );
+
+    const handleChangeField = ({ target }) =>
+        setCustomer( (customer) => ({ ...customer, [target.name]: target.value }) );
 
     
     return (
@@ -25,7 +28,7 @@ export const CustomerForm = ( { original, onSubmit } ) => {
                 name="firstName"
                 id="firstName"
                 value={customer.firstName} 
-                onChange={handleChangeFirstName}
+                onChange={handleChangeField}
             />
             <label htmlFor="firstName" >First name</label>
             <input 
@@ -33,7 +36,7 @@ export const CustomerForm = ( { original, onSubmit } ) => {
                 name="lastName"
                 id="lastName"
                 value={customer.lastName} 
-                onChange={handleChangeLastName}
+                onChange={handleChangeField}
             />
             <label htmlFor="lastName" >Last name</label>
             <input 
@@ -41,7 +44,7 @@ export const CustomerForm = ( { original, onSubmit } ) => {
                 name="phoneNumber"
                 id="phoneNumber"
                 value={customer.phoneNumber} 
-                onChange={handleChangePhoneNumber}
+                onChange={handleChangeField}
             />
             <label htmlFor="phoneNumber" >Phone number</label>
             <input type="submit" value="Add" />
