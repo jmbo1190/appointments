@@ -11,7 +11,11 @@ import {
     // container,
     initializeReactContainer,
     render,
-    click
+    click,
+    element,
+    elements,
+    textOf,
+    typesOf,
   } from "./reactTestExtensions";
   
 describe("Appointment", () => {
@@ -26,7 +30,7 @@ describe("Appointment", () => {
   });
 
   const appointmentTable = () =>
-    document.querySelector(
+    element(
       "#appointmentView > table"
     );
 
@@ -158,7 +162,7 @@ describe("Appointment", () => {
   it("renders an h3 element", () => {
     render(<Appointment customer={blankCustomer} />);
     expect(
-      document.querySelector("h3")
+      element("h3")
     ).not.toBeNull();
   });
 
@@ -172,7 +176,7 @@ describe("Appointment", () => {
       />
     );
     expect(
-      document.querySelector("h3").textContent
+      element("h3").textContent
     ).toEqual("Today’s appointment at 09:00");
   });
 });
@@ -190,6 +194,8 @@ describe("AppointmentsDayView", () => {
     },
   ];
 
+  const secondButton = () => elements("button")[1];
+
   beforeEach(() => {
     initializeReactContainer();
   });
@@ -198,7 +204,7 @@ describe("AppointmentsDayView", () => {
   it("renders a div with the right id", () => {
     render(<AppointmentsDayView appointments={[]} />);
     expect(
-      document.querySelector(
+      element(
         "div#appointmentsDayView"
       )
     ).not.toBeNull();
@@ -206,8 +212,8 @@ describe("AppointmentsDayView", () => {
 
   it("renders an ol element to display appointments", () => {
     render(<AppointmentsDayView appointments={[]} />);
-    const listElement = document.querySelector("ol");
-    expect(listElement).not.toBeNull();
+    // const listElement = element("ol");
+    expect(element("ol")).not.toBeNull();
   });
 
   it("renders an li for each appointment", () => {
@@ -217,9 +223,8 @@ describe("AppointmentsDayView", () => {
       />
     );
 
-    const listChildren =
-      document.querySelectorAll("ol > li");
-    expect(listChildren).toHaveLength(2);
+    // const listChildren = elements("ol > li");
+    expect(elements("ol > li")).toHaveLength(2);
   });
 
   it("renders the time of each appointment", () => {
@@ -229,14 +234,15 @@ describe("AppointmentsDayView", () => {
       />
     );
 
-    const listChildren =
-      document.querySelectorAll("li");
-    expect(listChildren[0]).toContainText(
-      "12:00"
-    );
-    expect(listChildren[1]).toContainText(
-      "13:00"
-    );
+    // const listChildren =
+    //   elements("li");
+    // expect(listChildren[0]).toContainText(
+    //   "12:00"
+    // );
+    // expect(listChildren[1]).toContainText(
+    //   "13:00"
+    // );
+    expect(textOf(elements("li"))).toEqual(["12:00", "13:00"]);
   });
 
   it("initially shows a message saying there are no appointments today", () => {
@@ -265,10 +271,12 @@ describe("AppointmentsDayView", () => {
     );
 
     const buttons =
-      document.querySelectorAll("li > button");
+      elements("li > button");
 
-    expect(buttons).toHaveLength(2);
-    expect(buttons[0].type).toEqual("button");
+    // expect(buttons).toHaveLength(2);
+    // expect(buttons[0].type).toEqual("button");
+    expect(typesOf(elements("li > *"))).toEqual([ "button", "button", ]);
+      
   });
 
   it("renders another appointment when selected", () => {
@@ -277,8 +285,8 @@ describe("AppointmentsDayView", () => {
         appointments={twoAppointments}
       />
     );
-    const button = document.querySelectorAll("button")[1];
-    click(button);
+    // const button = elements("button")[1];
+    click(secondButton());
     expect(document.body).toContainText(
       "Jordan"
     );
@@ -290,9 +298,9 @@ describe("AppointmentsDayView", () => {
         appointments={twoAppointments}
       />
     );
-    const button = document.querySelectorAll("button")[1];
-    click(button);
-    expect(button.className).toContain("toggled");
+    // const button = elements("button")[1];
+    click(secondButton());
+    expect(secondButton().className).toContain("toggled");
   });
 
   it("does not add toggled class if button is not selected", () => {
@@ -301,8 +309,7 @@ describe("AppointmentsDayView", () => {
         appointments={twoAppointments}
       />
     );
-    const button =
-      document.querySelectorAll("button")[1];
-    expect(button.className).not.toContain("toggled");
+    // const button = elements("button")[1];
+    expect(secondButton().className).not.toContain("toggled");
   });
 });
