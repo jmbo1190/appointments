@@ -2,6 +2,7 @@ import React from "react";
 import { 
     element, 
     form,
+    field,
     render,
     initializeReactContainer,
 } from "./reactTestExtensions";
@@ -23,17 +24,16 @@ describe("CustomerForm", () => {
 
     it("renders the firstName field as a text box", () => {
         render(<CustomerForm original={blankCustomer} />);
-        const field = form().elements.firstName;  // among form elements, get the one named firstName
-        expect(field).not.toBeNull();
-        expect(field.tagName).toEqual("INPUT");
-        expect(field.type).toEqual("text");
+        // const field = form().elements.firstName;  // among form elements, get the one named firstName
+        expect(field("firstName")).not.toBeNull();
+        expect(field("firstName").tagName).toEqual("INPUT");
+        expect(field("firstName").type).toEqual("text");
     });
 
     it("includes the existing value for the firstName", () => {
         const customer = { firstName: "Ashley" };
         render(<CustomerForm original={ customer } />);
-        const field = form().elements.firstName;  // among form elements, get the one named firstName
-        expect(field.value).toEqual("Ashley");
+        expect(field("firstName").value).toEqual("Ashley");
     });
 
 });
