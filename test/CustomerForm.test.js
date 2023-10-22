@@ -6,6 +6,7 @@ import {
     render,
     click,
     submit,
+    submitButton,
     initializeReactContainer,
 } from "./reactTestExtensions";
 import { CustomerForm } from "../src/CustomerForm";
@@ -57,8 +58,8 @@ describe("CustomerForm", () => {
 
     it("renders a submit button", () => {
         render(<CustomerForm original={blankCustomer} />);
-        const button = element("input[type=submit]");
-        expect(button).not.toBeNull();
+        // const button = element("input[type=submit]");
+        expect(submitButton()).not.toBeNull();
     });
 
     it("saves existing first name when submitted", () => {

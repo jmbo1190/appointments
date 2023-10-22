@@ -25,18 +25,23 @@ export const submit = (formElement) => {
     return event;
 };
 
-export const element = (selector) =>
-  document.querySelector(selector);
+export const element = (selector) => document.querySelector(selector);
 
-export const elements = (selector) =>
-  Array.from(document.querySelectorAll(selector));
+export const elements = (selector) => Array.from(document.querySelectorAll(selector));
 
-export const typesOf = (elements) =>
-  elements.map((element) => element.type);
+export const typesOf = (elements) => elements.map((element) => element.type);
 
-export const textOf = (elements) =>
-  elements.map((element) => element.textContent);
+export const textOf = (elements) => elements.map((element) => element.textContent);
 
 export const form = (id) => element("form");
 
 export const field = (fieldName) => form().elements[fieldName];
+
+export const submitButton = () => element("input[type=submit]");
+
+
+export const originalValueProperty = (reactElement) => {
+    const prototype = Object.getPrototypeOf(reactElement);
+    return Object.getOwnPropertyDescriptor( prototype, "value" );
+  };
+  
