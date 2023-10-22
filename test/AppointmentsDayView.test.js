@@ -1,6 +1,6 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
-import { act } from "react-dom/test-utils";
+// import ReactDOM from "react-dom/client";
+// import { act } from "react-dom/test-utils";
 import {
   Appointment,
   AppointmentsDayView,
@@ -8,8 +8,10 @@ import {
 
 // Test helper modules
 import {
+    // container,
     initializeReactContainer,
-    container,
+    render,
+    click
   } from "./reactTestExtensions";
   
 describe("Appointment", () => {
@@ -22,11 +24,6 @@ describe("Appointment", () => {
   beforeEach(() => {
     initializeReactContainer();
   });
-
-  const render = (component) =>
-    act(() =>
-      ReactDOM.createRoot(container).render(component)
-    );
 
   const appointmentTable = () =>
     document.querySelector(
@@ -197,10 +194,6 @@ describe("AppointmentsDayView", () => {
     initializeReactContainer();
   });
 
-  const render = (component) =>
-    act(() =>
-      ReactDOM.createRoot(container).render(component)
-    );
 
   it("renders a div with the right id", () => {
     render(<AppointmentsDayView appointments={[]} />);
@@ -284,9 +277,8 @@ describe("AppointmentsDayView", () => {
         appointments={twoAppointments}
       />
     );
-    const button =
-      document.querySelectorAll("button")[1];
-    act(() => button.click());
+    const button = document.querySelectorAll("button")[1];
+    click(button);
     expect(document.body.textContent).toContain(
       "Jordan"
     );
@@ -298,9 +290,8 @@ describe("AppointmentsDayView", () => {
         appointments={twoAppointments}
       />
     );
-    const button =
-      document.querySelectorAll("button")[1];
-    act(() => button.click());
+    const button = document.querySelectorAll("button")[1];
+    click(button);
     expect(button.className).toContain("toggled");
   });
 
