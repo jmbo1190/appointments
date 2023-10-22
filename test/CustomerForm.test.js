@@ -36,4 +36,10 @@ describe("CustomerForm", () => {
         expect(field("firstName").value).toEqual("Ashley");
     });
 
+    it("renders a label for the firstName field", () => {
+        render(<CustomerForm original={blankCustomer} />);
+        const label = element("label[for=firstName]");
+        expect(label).not.toBeNull();
+    });
+
 });
