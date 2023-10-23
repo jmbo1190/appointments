@@ -23,6 +23,7 @@ export const CustomerForm = ( { original, onSubmit } ) => {
     
     return (
         <form onSubmit={handleSubmit}>
+            <label htmlFor="firstName" >First name</label>
             <input 
                 type="text" 
                 name="firstName"
@@ -30,7 +31,7 @@ export const CustomerForm = ( { original, onSubmit } ) => {
                 value={customer.firstName} 
                 onChange={handleChangeField}
             />
-            <label htmlFor="firstName" >First name</label>
+            <label htmlFor="lastName" >Last name</label>
             <input 
                 type="text" 
                 name="lastName"
@@ -38,7 +39,7 @@ export const CustomerForm = ( { original, onSubmit } ) => {
                 value={customer.lastName} 
                 onChange={handleChangeField}
             />
-            <label htmlFor="lastName" >Last name</label>
+            <label htmlFor="phoneNumber" >Phone number</label>
             <input 
                 type="text" 
                 name="phoneNumber"
@@ -46,7 +47,6 @@ export const CustomerForm = ( { original, onSubmit } ) => {
                 value={customer.phoneNumber} 
                 onChange={handleChangeField}
             />
-            <label htmlFor="phoneNumber" >Phone number</label>
             <input type="submit" value="Add" />
         </form>
         );
